@@ -36,7 +36,74 @@
     linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
 }
 
-/* KaTeX styles - Tech centered */
-.katex-display {
-  @apply overflow-x-auto my-8 p-6 bg-gray-50 border border-black/5 font-mono;
+@layer utilities {
+  /* Technical Brackets */
+  .brackets {
+    position: relative;
+  }
+  .brackets::before, .brackets::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    pointer-events: none;
+    opacity: 0.4;
+  }
+  .brackets::before {
+    top: 8px;
+    left: 8px;
+    border-top: 1.5px solid currentColor;
+    border-left: 1.5px solid currentColor;
+  }
+  .brackets::after {
+    bottom: 8px;
+    right: 8px;
+    border-bottom: 1.5px solid currentColor;
+    border-right: 1.5px solid currentColor;
+  }
+
+  /* Scanning line */
+  .scan-container {
+    position: relative;
+    overflow: hidden;
+  }
+  .scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, black, transparent);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 20;
+  }
+  .group:hover .scan-line {
+    animation: scan 3s linear infinite;
+    opacity: 0.1;
+  }
+
+  @keyframes scan {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(400px); } /* Approx card height */
+  }
+
+  .list-square {
+    list-style-type: none !important;
+    padding-left: 0 !important;
+  }
+  .list-square li {
+    position: relative;
+    padding-left: 1.25rem !important;
+    margin-bottom: 0.5rem;
+  }
+  .list-square li::before {
+    content: "■";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8em;
+    opacity: 0.8;
+  }
 }

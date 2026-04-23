@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { db } from '../lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { motion, AnimatePresence } from 'motion/react';
-import { Send, CheckCircle2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -31,9 +30,9 @@ export default function Footer() {
         {/* Info Column */}
         <div className="space-y-4">
           <div className="text-[10px] font-bold opacity-40 uppercase tracking-widest"></div>
-          <h2 className="text-2xl font-bold tracking-tighter">CONTACT</h2>
+          <h2 className="text-2xl font-bold tracking-tighter">CONTACT ME:</h2>
           <p className="text-[10px] opacity-60 leading-relaxed max-w-xs">
-            For Tecnical reviews, opinions on my work. 
+            Direct interface for technical collaboration, inquiry ,reviews and opinions on my work.
           </p>
         </div>
 
@@ -50,14 +49,14 @@ export default function Footer() {
             />
             <input
               type="email"
-              placeholder="EMAIL"
+              placeholder="EMAIL_ADDR"
               required
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="bg-white border border-black p-3 focus:bg-black focus:text-white outline-none transition-all text-[10px] font-bold"
             />
             <textarea
-              placeholder="Message"
+              placeholder="MESSAGE"
               required
               rows={2}
               value={formData.message}
@@ -69,17 +68,22 @@ export default function Footer() {
               disabled={status !== 'idle'}
               className="md:col-span-2 pixel-btn text-[10px] font-bold py-3"
             >
-              {status === 'success' ? 'sent' : status === 'sending' ? 'UPLOADING...' : 'Send'}
+              {status === 'success' ? 'SENT' : status === 'sending' ? 'SENDING...' : 'SEND'}
             </button>
           </form>
         </div>
       </div>
       
-      <div className="max-w-7xl mx-auto mt-20 pt-6 border-t border-black flex justify-between items-center font-mono text-[9px] font-bold opacity-40 uppercase tracking-tight">
-        <div>&copy; {new Date().getFullYear()} Hermits — ALL RIGHTS RESERVED</div>
-        <div className="flex gap-6">
-           <span>LAT: 28.6139° N</span>
-           <span>LNG: 77.2090° E</span>
+      <div className="max-w-7xl mx-auto mt-20 pt-6 border-t border-black flex flex-col md:flex-row justify-between items-center gap-4 font-mono text-[9px] font-bold uppercase tracking-tight">
+        <div className="opacity-40">&copy; {new Date().getFullYear()} SYS.PRO — ALL RIGHTS RESERVED</div>
+        <div className="flex items-center gap-6">
+           <Link to="/admin" className="bg-black text-white px-3 py-1 hover:bg-gray-800 transition-colors">
+             ACCESS_ADMIN_PORTAL
+           </Link>
+           <div className="flex gap-4 opacity-40">
+             <span>LAT: 28.6139° N</span>
+             <span>LNG: 77.2090° E</span>
+           </div>
         </div>
       </div>
     </footer>
