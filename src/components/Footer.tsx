@@ -32,7 +32,7 @@ export default function Footer() {
           <div className="text-[10px] font-bold opacity-40 uppercase tracking-widest"></div>
           <h2 className="text-2xl font-bold tracking-tighter">CONTACT ME:</h2>
           <p className="text-[10px] opacity-60 leading-relaxed max-w-xs">
-            Direct interface for technical collaboration, inquiry ,reviews and opinions on my work.
+            Technical collaboration, inquiry ,reviews and opinions on my work.
           </p>
         </div>
 
@@ -75,7 +75,7 @@ export default function Footer() {
       </div>
       
       <div className="max-w-7xl mx-auto mt-20 pt-6 border-t border-black flex flex-col md:flex-row justify-between items-center gap-4 font-mono text-[9px] font-bold uppercase tracking-tight">
-        <div className="opacity-40">&copy; {new Date().getFullYear()} SYS.PRO — ALL RIGHTS RESERVED</div>
+        <div className="opacity-40">&copy; {new Date().getFullYear()} Hermits — ALL RIGHTS RESERVED</div>
         <div className="flex items-center gap-6">
            <Link to="/admin" className="bg-black text-white px-3 py-1 hover:bg-gray-800 transition-colors">
              ACCESS_ADMIN_PORTAL

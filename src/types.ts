@@ -1,6 +1,7 @@
 export interface PortfolioData {
   name: string;
   photoUrl: string;
+  cvUrl?: string;
   education: string;
   description: string;
   experience: string;

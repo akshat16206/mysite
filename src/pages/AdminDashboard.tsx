@@ -103,13 +103,19 @@ export default function AdminDashboard() {
 
 function PortfolioManager() {
   const [data, setData] = useState<PortfolioData>({
-    name: '', photoUrl: '', education: '', description: '', experience: '', skills: '', email: ''
+    name: '', photoUrl: '', cvUrl: '', education: '', description: '', experience: '', skills: '', email: ''
   });
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     getDoc(doc(db, 'settings', 'portfolio')).then(docSnap => {
-      if (docSnap.exists()) setData(docSnap.data() as PortfolioData);
+      if (docSnap.exists()) {
+        const existingData = docSnap.data() as PortfolioData;
+        setData({
+          ...existingData,
+          cvUrl: existingData.cvUrl || ''
+        });
+      }
     });
   }, []);
 
@@ -142,12 +148,22 @@ function PortfolioManager() {
           </div>
         </div>
 
-        <div className="space-y-2">
-          <label className="text-xs uppercase font-bold tracking-widest opacity-40">Photo URL</label>
-          <input 
-            value={data.photoUrl} onChange={e => setData({...data, photoUrl: e.target.value})}
-            className="w-full p-4 bg-gray-50 rounded-2xl outline-none focus:ring-2 ring-black/5"
-          />
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <label className="text-xs uppercase font-bold tracking-widest opacity-40">Photo URL</label>
+            <input 
+              value={data.photoUrl} onChange={e => setData({...data, photoUrl: e.target.value})}
+              className="w-full p-4 bg-gray-50 rounded-2xl outline-none focus:ring-2 ring-black/5"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-xs uppercase font-bold tracking-widest opacity-40">CV PDF URL</label>
+            <input 
+              value={data.cvUrl} onChange={e => setData({...data, cvUrl: e.target.value})}
+              placeholder="Direct PDF link or Google Drive link"
+              className="w-full p-4 bg-gray-50 rounded-2xl outline-none focus:ring-2 ring-black/5"
+            />
+          </div>
         </div>
 
         <div className="space-y-2">

@@ -65,7 +65,21 @@ export default function BlogPostView() {
               <span className="bg-black text-white px-2 py-1">AUTH: {blog.author}</span>
               <span className="py-1">TS: {blog.createdAt?.toDate().toLocaleDateString('en-GB').replace(/\//g, '.')}</span>
             </div>
-            <button className="opacity-40 hover:opacity-100 transition-opacity p-2 border border-black/10">
+            <button 
+              onClick={() => {
+                if (navigator.share) {
+                  navigator.share({
+                    title: blog.title,
+                    url: window.location.href
+                  }).catch(() => {});
+                } else {
+                  navigator.clipboard.writeText(window.location.href);
+                  alert('Link copied to clipboard');
+                }
+              }}
+              className="opacity-40 hover:opacity-100 transition-opacity p-2 border border-black/10"
+              title="Share post"
+            >
               <Share2 size={14} />
             </button>
           </div>
