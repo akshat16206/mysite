@@ -1,0 +1,122 @@
+{
+  "entities": {
+    "Portfolio": {
+      "title": "Portfolio",
+      "description": "The main portfolio information",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "photoUrl": { "type": "string" },
+        "education": { "type": "string" },
+        "description": { "type": "string" },
+        "experience": { "type": "string" },
+        "skills": { "type": "string" },
+        "email": { "type": "string" }
+      },
+      "required": ["name", "email"]
+    },
+    "Topic": {
+      "title": "Topic",
+      "description": "Categorization topic for blogs",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" }
+      },
+      "required": ["name"]
+    },
+    "Blog": {
+      "title": "Blog",
+      "description": "A blog post entry",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "topicId": { "type": "string" },
+        "author": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "published": { "type": "boolean" }
+      },
+      "required": ["title", "content", "topicId", "author"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "Professional work projects",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "link": { "type": "string" },
+        "order": { "type": "number" }
+      },
+      "required": ["title", "description"]
+    },
+    "FunProject": {
+      "title": "Fun Project",
+      "description": "Hobby or fun projects",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "externalLink": { "type": "string" },
+        "category": { "type": "string" },
+        "imageUrl": { "type": "string" }
+      },
+      "required": ["title", "externalLink"]
+    },
+    "SocialLink": {
+      "title": "Social Link",
+      "description": "Links to social media profiles",
+      "type": "object",
+      "properties": {
+        "platform": { "type": "string" },
+        "url": { "type": "string" },
+        "icon": { "type": "string" }
+      },
+      "required": ["platform", "url"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Contact form messages from users",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "message"]
+    }
+  },
+  "firestore": {
+    "/settings/portfolio": {
+      "schema": "Portfolio",
+      "description": "Main portfolio settings"
+    },
+    "/topics/{topicId}": {
+      "schema": "Topic",
+      "description": "Blog categorization topics"
+    },
+    "/blogs/{blogId}": {
+      "schema": "Blog",
+      "description": "Individual blog posts"
+    },
+    "/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Professional work portfolio entries"
+    },
+    "/funProjects/{funProjectId}": {
+      "schema": "FunProject",
+      "description": "Fun/Hobby projects"
+    },
+    "/socialLinks/{socialLinkId}": {
+      "schema": "SocialLink",
+      "description": "Social media links"
+    },
+    "/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Received contact messages"
+    }
+  }
+}

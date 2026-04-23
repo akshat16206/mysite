@@ -1,0 +1,65 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.email == 'guptaakshat697@gmail.com';
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128;
+    }
+
+    // Portfolio Settings
+    match /settings/portfolio {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Topics
+    match /topics/{topicId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Blogs
+    match /blogs/{blogId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Projects
+    match /projects/{projectId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Fun Projects
+    match /funProjects/{funProjectId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Social Links
+    match /socialLinks/{socialLinkId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Messages (Public can create, Admin can read/delete)
+    match /messages/{messageId} {
+      allow create: if true;
+      allow read, delete: if isAdmin();
+      allow update: if false;
+    }
+  }
+}

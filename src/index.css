@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-brand-primary: #000000;
+  --color-brand-secondary: #ffffff;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-black antialiased font-sans;
+  }
+}
+
+.pixel-border {
+  @apply border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)];
+}
+
+.pixel-btn {
+  @apply px-4 py-2 border border-black bg-white hover:bg-black hover:text-white transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[1px] active:translate-y-[1px];
+}
+
+.markdown-body {
+  @apply prose max-w-none prose-p:my-4 prose-headings:font-mono prose-headings:font-bold prose-headings:uppercase prose-headings:tracking-tighter prose-code:font-mono prose-code:bg-gray-100 prose-code:px-1 prose-code:rounded;
+}
+
+/* Physics-like grid pattern */
+.bg-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+}
+
+/* KaTeX styles - Tech centered */
+.katex-display {
+  @apply overflow-x-auto my-8 p-6 bg-gray-50 border border-black/5 font-mono;
+}
