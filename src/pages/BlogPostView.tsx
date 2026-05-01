@@ -18,11 +18,17 @@ export default function BlogPostView() {
       const docRef = doc(db, 'blogs', blogId);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        setBlog({ id: docSnap.id, ...docSnap.data() } as BlogPost);
+        const data = docSnap.data() as BlogPost;
+        setBlog({ id: docSnap.id, ...data } as BlogPost);
+        document.title = `${data.title} | Blog`;
       }
       setLoading(false);
     };
     fetchBlog();
+
+    return () => {
+      document.title = 'Professional Portfolio & Blog';
+    };
   }, [blogId]);
 
   if (loading) {
@@ -67,20 +73,28 @@ export default function BlogPostView() {
             </div>
             <button 
               onClick={() => {
+                const shareUrl = window.location.href;
                 if (navigator.share) {
                   navigator.share({
                     title: blog.title,
-                    url: window.location.href
-                  }).catch(() => {});
+                    text: `Check out this post: ${blog.title}`,
+                    url: shareUrl
+                  }).catch(() => {
+                    // Fallback to clipboard if share interface is canceled/fails
+                    navigator.clipboard.writeText(shareUrl);
+                  });
                 } else {
-                  navigator.clipboard.writeText(window.location.href);
-                  alert('Link copied to clipboard');
+                  navigator.clipboard.writeText(shareUrl);
+                  const btn = document.activeElement as HTMLButtonElement;
+                  const originalChild = btn.innerHTML;
+                  btn.innerText = 'COPIED';
+                  setTimeout(() => { btn.innerHTML = originalChild; }, 2000);
                 }
               }}
-              className="opacity-40 hover:opacity-100 transition-opacity p-2 border border-black/10"
+              className="opacity-40 hover:opacity-100 transition-opacity p-2 border border-black/10 flex items-center gap-2 group/btn"
               title="Share post"
             >
-              <Share2 size={14} />
+              <Share2 size={14} className="group-hover/btn:scale-110 transition-transform" />
             </button>
           </div>
         </header>
