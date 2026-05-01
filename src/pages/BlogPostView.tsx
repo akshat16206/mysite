@@ -69,7 +69,7 @@ export default function BlogPostView() {
           <div className="flex items-center justify-between pt-8 border-t border-black/10 font-mono text-[10px] opacity-60">
             <div className="flex gap-6 uppercase font-bold tracking-widest">
               <span className="bg-black text-white px-2 py-1">AUTH: {blog.author}</span>
-              <span className="py-1">TS: {blog.createdAt?.toDate().toLocaleDateString('en-GB').replace(/\//g, '.')}</span>
+              <span className="py-1">TS: {blog.createdAt?.toDate?.()?.toLocaleDateString('en-GB').replace(/\//g, '.') || '00.00.00'}</span>
             </div>
             <button 
               onClick={() => {

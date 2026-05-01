@@ -71,7 +71,7 @@ export default function BlogList() {
                <div className="flex justify-between items-baseline">
                  <h2 className="font-serif text-4xl group-hover:italic transition-all duration-300">{blog.title}</h2>
                  <div className="font-sans text-[10px] uppercase font-bold tracking-widest opacity-40 group-hover:opacity-100 transition-opacity">
-                   {blog.createdAt?.toDate().toLocaleDateString('en-US', { month: 'short', day: '2-digit' })}
+                   {blog.createdAt?.toDate?.()?.toLocaleDateString('en-US', { month: 'short', day: '2-digit' }) || 'N/A'}
                  </div>
                </div>
             </Link>
